@@ -18,7 +18,7 @@ docker run -it --rm \
   -e "READINGS_SCRIPT_COMMAND=echo test; exit 1" \
   -e TIBBER_LOGIN=me@example.com \
   -e TIBBER_PASSWORD=mysecretpassword \
-  ghcr.io/micw/tibber-meter-uploader
+  ghcr.io/micw/tibber-meter-uploader:master
 ```
 
 ## Konfiguration
@@ -65,4 +65,4 @@ Innerhalb des Shell-Scriptes stehen die folgenden Umgebnugsvariablen zur Verfüg
 * `FIRST_DAY` - Der letzte Tag, für den der Zählerstand benötigt wird. Format: `2023-01-22`
 * `METER` - Die abgefragte Zähelernummer. Format: `1EBZ0123456789`
 * `FIRST_DAY_START_ISO_TZ` - Die Startzeit des ersten Tages, Format: `2023-01-19T00:00:00+01:00[Europe/Berlin]`
-* `LAST_DAY_END_ISO_TZ` - Die Startzeit des folgetages des letzten Tages. Format: `2023-01-23T00:00:00+01:00[Europe/Berlin]`
+* `LAST_DAY_END_ISO_TZ` - Die Startzeit des Folgetages des letzten Tages. Format: `2023-01-23T00:00:00+01:00[Europe/Berlin]`
