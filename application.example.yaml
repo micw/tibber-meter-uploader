@@ -1,0 +1,17 @@
+
+# put tibber credentials here
+TIBBER_LOGIN: my@mydomain.com
+TIBBER_PASSWORD: s3cr3t123!
+
+READINGS_SOURCE_CLASS: ScriptedRestApiMeterReadingSource
+
+# some script that returns a list of readings within the given time range. below is my own example where I removed all personal data
+READINGS_SCRIPT_COMMAND: >
+     curl -s -X GET -G -H "x-api-key: some-api-key" 
+     "https://some-meter-api.com/get/${METER}"
+     --data-urlencode "startTs=#{'$'}{FIRST_DAY_START_ISO_TZ}"
+     --data-urlencode "endTs=#{'$'}{LAST_DAY_END_ISO_TZ}"
+     |
+     jq --raw-output '.[] | [ (.intervalTime | split("T") | .[0]) , (.energyImportTotal / 1000 | floor) ] | join(" ")'
+
+READINGS_METER: 1EBZ0123456789

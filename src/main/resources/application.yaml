@@ -1,0 +1,10 @@
+readings:
+   source:
+      class: ${READINGS_SOURCE_CLASS}
+      script:
+        meterNumber: ${READINGS_METER:}
+        command: ${READINGS_SCRIPT_COMMAND}
+
+tibber:
+   loginEmail: ${TIBBER_LOGIN}
+   password: ${TIBBER_PASSWORD}

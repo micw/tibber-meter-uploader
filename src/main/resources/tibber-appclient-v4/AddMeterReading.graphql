@@ -1,0 +1,19 @@
+mutation AddMeterReading($meterId: String!, $readingDate: String!, $meterRegister: String!, $reading: Float!) {
+  me {
+    addMeterReadings(meterId: $meterId, readingDate: $readingDate, readings: [ { id:$meterRegister, value: $reading}])
+    {
+      success {
+        inputTitle
+        inputValue
+        title
+        descriptionHtml
+        doneButtonText
+      }
+      error {
+        statusCode
+        title
+        message
+      }
+    }
+  }
+}
