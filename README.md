@@ -6,7 +6,20 @@ Es kann als Alternative zur manuellen monatlichen Eingabe von Zählerständen ve
 
 ## Bauen
 
-Das Projekt kann mit Java und Maven gebaut werden (`mvn package`). Das Weiteren liegt ein Dockerfile bei, welches einen Build via `docker build . -t tibber-meter-uploader` ermöglicht. Automatisierte Docker-Builds folgen.
+Das Projekt kann mit Java und Maven gebaut werden (`mvn package`). Das Weiteren liegt ein Dockerfile bei, welches einen Build via `docker build . -t tibber-meter-uploader` ermöglicht.
+
+Automatisierte Docker-Builds sind unter ghcr.io/micw/tibber-meter-uploader verfügbar.
+
+## Ausführen (docker)
+
+```
+docker run -it --rm \
+  -e "READINGS_SOURCE_CLASS=ScriptedRestApiMeterReadingSource" \
+  -e "READINGS_SCRIPT_COMMAND=echo test; exit 1" \
+  -e TIBBER_LOGIN=me@example.com \
+  -e TIBBER_PASSWORD=mysecretpassword \
+  ghcr.io/micw/tibber-meter-uploader
+```
 
 ## Konfiguration
 
