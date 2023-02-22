@@ -7,6 +7,7 @@ import java.util.NavigableMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,17 +29,21 @@ public class TibberUploader implements CommandLineRunner {
 	}
 
 	@Autowired
-	public IMeterReadingSource source;
+	protected IMeterReadingSource source;
 
 	@Autowired
-	public TibberPrivateApi tibberApi;
+	protected TibberPrivateApi tibberApi;
 
+	@Value("${dryRun}")
+	protected boolean dryRun;
+	
 	@Override
 	public void run(String... args) throws Exception {
+		System.err.println(1);
 		uploadMissingReadings();
 	}
 
-	@Scheduled(cron = "0 0 * * * *") // every full hour
+	@Scheduled(cron = "${scheduling.effectiveCronExpression:-}") // every full hour
 	public void uploadMissingReadings() throws Exception {
 
 		LocalDate today = LocalDate.now();
@@ -75,8 +80,12 @@ public class TibberUploader implements CommandLineRunner {
 				log.warn("Found new reading that is smaller than previous reading. Something is wrong. Processing stopped.");
 				return;
 			}
-			log.info("Adding new value at {} with reading {}", entry.getKey(), entry.getValue());
-			tibberApi.addAddMeterReading(info, entry.getKey(), entry.getValue());
+			if (dryRun) {
+				log.info("(DRY-RUN) Would add new value at {} with reading {}", entry.getKey(), entry.getValue());
+			} else {
+				log.info("Adding new value at {} with reading {}", entry.getKey(), entry.getValue());
+				tibberApi.addAddMeterReading(info, entry.getKey(), entry.getValue());
+			}
 		}
 
 	}

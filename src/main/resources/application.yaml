@@ -5,6 +5,13 @@ readings:
         meterNumber: ${READINGS_METER:}
         command: ${READINGS_SCRIPT_COMMAND}
 
+dryRun: ${DRY_RUN}
+
+scheduling:
+  enabled: ${SCHEDULING_ENABLED:true}
+  cronExpression: ${SCHEDULING_CRON:0 0 * * * *}
+  effectiveCronExpression: "#{ ${scheduling.enabled} ? '${scheduling.cronExpression}' : '-' }" 
+
 tibber:
    loginEmail: ${TIBBER_LOGIN}
    password: ${TIBBER_PASSWORD}

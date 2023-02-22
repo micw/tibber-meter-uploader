@@ -28,6 +28,10 @@ Die Konfiguration erfolgt über eine Konfigurationsdatei (`application.yaml`, si
 * `TIBBER_LOGIN` (benötigt): E-Mail-Adresse eines Tibber-Accounts
 * `TIBBER_PASSWORD` (benötigt): Passwort eines Tibber-Accounts
 * `READINGS_SOURCE_CLASS` (benötigt): Implementierungsklasse der Quelle für Zählerstände (siehe unten)
+* `SCHEDULING_ENABLED` (default: `true`): Wenn der Parameter auf `false` gesetzt wird, terminiert der Prozess nach einem einmaligen Durchlauf
+* `SCHEDULING_CRON` (default: `0 0 * * * *` = jede volle Stunde): Ermöglicht, den Ausführungszeitpunkt der regelmäßigen Durchläufe zu verändern
+* `DRY_RUN` (default: `false`): Wenn der Parameter auf `true` gesetzt wird, werden die an an Tibber zu übermittelnden Zählerstände nur angezeigt, aber nicht übertragen. Nützlich, um Quellen und die Konfiguration zu testen.
+
 
 ## Programmablauf
 
