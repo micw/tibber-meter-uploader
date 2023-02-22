@@ -70,3 +70,21 @@ Innerhalb des Shell-Scriptes stehen die folgenden Umgebnugsvariablen zur Verfüg
 * `METER` - Die abgefragte Zähelernummer. Format: `1EBZ0123456789`
 * `FIRST_DAY_START_ISO_TZ` - Die Startzeit des ersten Tages, Format: `2023-01-19T00:00:00+01:00[Europe/Berlin]`
 * `LAST_DAY_END_ISO_TZ` - Die Startzeit des Folgetages des letzten Tages. Format: `2023-01-23T00:00:00+01:00[Europe/Berlin]`
+
+
+### CommandLineMeterReadingSource
+
+Diese Quelle ließt Zählerstände von der Kommandozeile. Es können mehrere Zählerstände im Format datum=zählerstand übergeben werden. Statt des Datums kann auch das Schlüsselwort `today` verwendet werden, um den aktuellen Tag zu übergeben.
+
+Beispiel:
+
+```
+java -jar tibber-uploader.jar 2023-01-19=10003 2023-01-20=10114 2023-01-21=10234 today=10521
+```
+
+Die folgenden Konfigurationsparameter sind für die Quelle verfügbar:
+
+* `READINGS_SOURCE_CLASS` (benötigt): `CommandLineMeterReadingSource` für diese Quelle
+* `READINGS_METER`(optional): Wenn angegeben, prüft die Quelle, dass die von der Tibber-Api gelieferte Zählernummer dieser Zählernummer entspricht.
+
+Es ist sinnvoll, diese Quelle zusammen mit dem Konfigurationsparameter `SCHEDULING_ENABLED=false` zu verwenden, um das Programm nach dem Upload der Werte zu beenden.

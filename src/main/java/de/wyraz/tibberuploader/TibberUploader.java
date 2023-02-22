@@ -39,7 +39,7 @@ public class TibberUploader implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		System.err.println(1);
+		CommandLineArgsHolder.commandLineArgs = args;
 		uploadMissingReadings();
 	}
 

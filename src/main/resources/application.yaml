@@ -4,6 +4,8 @@ readings:
       script:
         meterNumber: ${READINGS_METER:}
         command: ${READINGS_SCRIPT_COMMAND}
+      commandline:
+        meterNumber: ${READINGS_METER:}
 
 dryRun: ${DRY_RUN}
 
