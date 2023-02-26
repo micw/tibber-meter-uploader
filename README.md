@@ -48,11 +48,13 @@ Die Konfiguration erfolgt über eine Konfigurationsdatei (`application.yaml`, si
 
 ### Meter Register ID
 
-In einigen Fällen ist bei Tibber nicht der Standard-OBIS-Code für den "Gesamt-Strombezug" hinterlegt sondern beispielsweise der für Tarif "HT" (siehe https://de.wikipedia.org/wiki/OBIS-Kennzahlen). In diesem Fall erscheint beim Start eine Fehlermeldung ähnliche dieser:
+In einigen Fällen ist bei Tibber nicht der Standard-OBIS-Code `1-1:1.8.0` für den Gesamt-Strombezug hinterlegt sondern `1-1:1.8.0`. In dem Fall erscheint beim Start eine Fehlermeldung ähnlich dieser:
 
 	Meter 149d2526-6c26-4435-9b2b-0dbfd3251bcd has no register with id '1-0:1.8.0'. Available registers are: 1-1:1.8.0
 
-Über den Konfigurtationsparameter `TIBBER_METER_REGISTER_ID = 1-1:1.8.0` kann die Anwendung so konfiguriert werden, dass Zählerstände für dieses Register an Tibber übergeben werden.
+Über den Konfigurtationsparameter `TIBBER_METER_REGISTER_ID = 1-1:1.8.0` kann die Anwendung so konfiguriert werden, dass Zählerstände für diesen OBIS-Code an Tibber übergeben werden.
+
+Eine Liste gängiger OBIS-Codes und deren Bedeutung kann unter https://de.wikipedia.org/wiki/OBIS-Kennzahlen gefunden werden.
 
 ## Programmablauf
 
