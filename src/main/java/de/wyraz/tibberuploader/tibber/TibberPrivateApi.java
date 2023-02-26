@@ -13,7 +13,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,7 +44,7 @@ public class TibberPrivateApi {
 
 	@Value("${tibber.password}")
 	protected String tibberPassword;
-	
+
 	protected final CloseableHttpClient httpClient=HttpClients.createDefault();
 	
 	protected final String LOGIN_URL="https://app.tibber.com/v1/login.credentials";
@@ -62,6 +61,13 @@ public class TibberPrivateApi {
 	
 	public TibberPrivateApi() throws IOException {
 	}
+	
+	@Value("${tibber.meterRegisterId:}")
+	public void setMeterRegisterId(String meterRegisterId) {
+		if (StringUtils.hasText(meterRegisterId)) {
+			InternalAccountInfoResponse.METER_REGISTER_ID=meterRegisterId;
+		}
+	} 
 	
 	public String login() throws IOException {
 		
@@ -94,6 +100,7 @@ public class TibberPrivateApi {
 	}
 	
 	public AccountInfo getAccoutInfo(LocalDate readingsFromDate, LocalDate readingsToDate) throws Exception {
+		
 		HttpPost post=new HttpPost(API_URL);
 		
 		JSONObject queryData=new JSONObject();

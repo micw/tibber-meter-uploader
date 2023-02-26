@@ -21,3 +21,4 @@ scheduling:
 tibber:
    loginEmail: ${TIBBER_LOGIN}
    password: ${TIBBER_PASSWORD}
+   meterRegisterId: ${TIBBER_METER_REGISTER_ID:}

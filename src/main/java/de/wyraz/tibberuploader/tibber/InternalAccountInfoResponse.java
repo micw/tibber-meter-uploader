@@ -6,6 +6,8 @@ import java.util.TreeMap;
 
 class InternalAccountInfoResponse {
 
+	public static String METER_REGISTER_ID="1-0:1.8.0";
+	
 	public AccountInfoData data;
 
 	public AccountInfo unwrap() {
@@ -84,7 +86,7 @@ class InternalAccountInfoResponse {
 			}
 			int regIndex=0;
 			for (AccountInfoMeterRegister reg: registers) {
-				if ("1-0:1.8.0".equals(reg.id)) {
+				if (METER_REGISTER_ID.equals(reg.id)) {
 					info.meterRegister=reg.id;
 					info.meterRegisterIndex=regIndex;
 					break;
@@ -99,7 +101,7 @@ class InternalAccountInfoResponse {
 					}
 					regIds.append(reg.id);
 				}
-				throw new IllegalArgumentException("Meter "+id+" has no register with id '1-0:1.8.0'. Available registers are: "+regIds);
+				throw new IllegalArgumentException("Meter "+id+" has no register with id '"+METER_REGISTER_ID+"'. Available registers are: "+regIds);
 			}
 		}
 	}
