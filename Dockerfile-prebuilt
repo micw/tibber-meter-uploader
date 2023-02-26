@@ -1,0 +1,8 @@
+# Build docker image based of the artifact created by `mvn package`
+FROM openjdk:17-alpine
+
+RUN apk add --no-cache curl jq bash
+
+ADD target/tibber-meter-uploader-1.0.0-SNAPSHOT.jar /tibber-meter-uploader-1.0.0-SNAPSHOT.jar
+
+CMD /tibber-meter-uploader-1.0.0-SNAPSHOT.jar

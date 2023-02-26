@@ -1,3 +1,6 @@
 *
 !src
+!target/tibber-meter-uploader-1.0.0-SNAPSHOT.jar
 !pom.xml
+!Dockerfile
+!Dockerfile-prebuilt

@@ -6,8 +6,12 @@ readings:
         command: ${READINGS_SCRIPT_COMMAND}
       commandline:
         meterNumber: ${READINGS_METER:}
+      dummy:
+        meterNumber: ${READINGS_METER:}
+        date: ${DUMMY_READING_DATE}
+        value: ${DUMMY_READING_VALUE}
 
-dryRun: ${DRY_RUN}
+dryRun: ${DRY_RUN:false}
 
 scheduling:
   enabled: ${SCHEDULING_ENABLED:true}

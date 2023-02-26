@@ -6,7 +6,7 @@ Es kann als Alternative zur manuellen monatlichen Eingabe von Zählerständen ve
 
 ## Bauen
 
-Das Projekt kann mit Java und Maven gebaut werden (`mvn package`). Das Weiteren liegt ein Dockerfile bei, welches einen Build via `docker build . -t tibber-meter-uploader` ermöglicht.
+Das Projekt kann mit Java und Maven gebaut werden (`mvn package`). Das Weiteren liegt ein Dockerfile bei, welches ein Packaging via `docker build . -t tibber-meter-uploader` ermöglicht.
 
 Automatisierte Docker-Builds sind unter ghcr.io/micw/tibber-meter-uploader verfügbar.
 
@@ -20,6 +20,20 @@ docker run -it --rm \
   -e TIBBER_PASSWORD=mysecretpassword \
   ghcr.io/micw/tibber-meter-uploader:master
 ```
+
+## Ausführen (nativ)
+
+Pre-built jars can be downloaded from https://mega.nz/folder/pi4yjaoI#OXNDwnkfyH6xOEJEdtN3pg . To run it, you need a Java Runtime Environment (JRE) with version 11 or higher installed. COnfig can be passed as environment variables or by creating `appliucation.yaml` in the working directory (e.g. next to the downloaded jar file).
+
+Example:
+
+```
+echo "TIBBER_LOGIN: me@example.com" > application.yaml
+echo "TIBBER_PASSWORD: mysecretpassword" >> application.yaml
+java -Xmx25M -jar tibber-meter-uploader.master.jar 
+```
+
+Memory assignment of the process can be tuned by the `-Xmx` option - adjust it to your needs so that the process does not get an out of memory error.
 
 ## Konfiguration
 
@@ -88,3 +102,14 @@ Die folgenden Konfigurationsparameter sind für die Quelle verfügbar:
 * `READINGS_METER`(optional): Wenn angegeben, prüft die Quelle, dass die von der Tibber-Api gelieferte Zählernummer dieser Zählernummer entspricht.
 
 Es ist sinnvoll, diese Quelle zusammen mit dem Konfigurationsparameter `SCHEDULING_ENABLED=false` zu verwenden, um das Programm nach dem Upload der Werte zu beenden.
+
+### DummyMeterReadingSource
+
+Diese Quelle stellt ein einzelnes statisches Reading zum Testen zur Verfügung.
+
+Die folgenden Konfigurationsparameter sind für die Quelle verfügbar:
+
+* `READINGS_SOURCE_CLASS` (benötigt): `DummyMeterReadingSource` für diese Quelle
+* `READINGS_METER`(optional): Wenn angegeben, prüft die Quelle, dass die von der Tibber-Api gelieferte Zählernummer dieser Zählernummer entspricht.
+* `DUMMY_READING_DATE`(benötigt): Datum des Dummy-Readings, z.b. 2023-01-19
+* `DUMMY_READING_VALUE`(benötigt): Wert des Dummy-Readings, z.b. 10003

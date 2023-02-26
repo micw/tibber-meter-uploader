@@ -35,9 +35,21 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package
+        
+      - name: Upload jar to mega.nz
+        uses: Difegue/action-megacmd@043c6d2a167af3ae0904fc88c6b2829e4140dc8d
+        with:
+          args: put target/tibber-meter-uploader-1.0.0-SNAPSHOT.jar /tibber-meter-uploader/tibber-meter-uploader.${{ github.ref_name }}.jar
+        env:
+          USERNAME: ${{ secrets.MEGA_USERNAME }}
+          PASSWORD: ${{ secrets.MEGA_PASSWORD }}
+
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
+          file: Dockerfile-prebuilt
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
