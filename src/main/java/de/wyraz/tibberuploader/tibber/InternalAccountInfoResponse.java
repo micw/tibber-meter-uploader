@@ -1,6 +1,5 @@
 package de.wyraz.tibberuploader.tibber;
 
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.TreeMap;
@@ -93,7 +92,14 @@ class InternalAccountInfoResponse {
 				regIndex++;
 			}
 			if (info.meterRegister==null) {
-				throw new IllegalArgumentException("Meter "+id+" has no register with id '1-0:1.8.0'");
+				StringBuilder regIds=new StringBuilder();
+				for (AccountInfoMeterRegister reg: registers) {
+					if (regIds.length()>0) {
+						regIds.append(", ");
+					}
+					regIds.append(reg.id);
+				}
+				throw new IllegalArgumentException("Meter "+id+" has no register with id '1-0:1.8.0'. Available registers are: "+regIds);
 			}
 		}
 	}
