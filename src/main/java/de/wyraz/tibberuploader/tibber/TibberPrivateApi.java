@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.wyraz.tibberuploader.TibberConstants;
@@ -57,6 +58,7 @@ public class TibberPrivateApi {
 	
 	protected final ObjectMapper MAPPER=new ObjectMapper()
 			.findAndRegisterModules()
+			.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 			.setTimeZone(TibberConstants.TIMEZONE);
 	
 	public TibberPrivateApi() throws IOException {
