@@ -89,7 +89,7 @@ Die folgenden Konfigurationsparameter sind für die Quelle verfügbar:
 Innerhalb des Shell-Scriptes stehen die folgenden Umgebnugsvariablen zur Verfügung:
 
 * `FIRST_DAY` - Der erste Tag, für den der Zählerstand benötigt wird. Format: `2023-01-19`
-* `FIRST_DAY` - Der letzte Tag, für den der Zählerstand benötigt wird. Format: `2023-01-22`
+* `LAST_DAY` - Der letzte Tag, für den der Zählerstand benötigt wird. Format: `2023-01-22`
 * `METER` - Die abgefragte Zähelernummer. Format: `1EBZ0123456789`
 * `FIRST_DAY_START_ISO_TZ` - Die Startzeit des ersten Tages, Format: `2023-01-19T00:00:00+01:00[Europe/Berlin]`
 * `LAST_DAY_END_ISO_TZ` - Die Startzeit des Folgetages des letzten Tages. Format: `2023-01-23T00:00:00+01:00[Europe/Berlin]`
