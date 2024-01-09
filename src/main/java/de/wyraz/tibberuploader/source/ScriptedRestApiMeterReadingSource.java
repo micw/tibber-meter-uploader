@@ -24,7 +24,7 @@ import de.wyraz.tibberuploader.TibberConstants;
  * 
  * Provided environment variables:
  *   FIRST_DAY - the first day to query in the format 2023-01-19
- *   LAST_DAY - the first day to query in the format 2023-01-22
+ *   LAST_DAY - the last day to query in the format 2023-01-22
  *   METER - the meter that is being queried in the format 1EBZ0123456789
  *   FIRST_DAY_START_ISO_TZ - the start time of first day to query in ISO format with local time zone, e.g. 2023-01-19T00:00:00+01:00[Europe/Berlin]
  *   LAST_DAY_END_ISO_TZ - the start time of the day after the last day to query in ISO format with local time zone, e.g. 2023-01-23T00:00:00+01:00[Europe/Berlin]
@@ -74,7 +74,7 @@ public class ScriptedRestApiMeterReadingSource implements IMeterReadingSource {
 		
 		Map<String, String> env=new HashMap<>();
 		env.put("FIRST_DAY", firstDay.toString());
-		env.put("LAST_DAY", firstDay.toString());
+		env.put("LAST_DAY", lastDay.toString());
 		env.put("METER", meterNumber);
 		env.put("FIRST_DAY_START_ISO_TZ", firstDay.atStartOfDay(TibberConstants.TIMEZONE_ID).toString());
 		env.put("LAST_DAY_END_ISO_TZ", lastDay.plusDays(1).atStartOfDay(TibberConstants.TIMEZONE_ID).toString());
