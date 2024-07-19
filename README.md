@@ -23,7 +23,7 @@ docker run -it --rm \
 
 ## Ausführen (nativ)
 
-Pre-built jars can be downloaded from https://mega.nz/folder/pi4yjaoI#OXNDwnkfyH6xOEJEdtN3pg . To run it, you need a Java Runtime Environment (JRE) with version 11 or higher installed. COnfig can be passed as environment variables or by creating `appliucation.yaml` in the working directory (e.g. next to the downloaded jar file).
+Pre-built jars can be downloaded from https://mega.nz/folder/pi4yjaoI#OXNDwnkfyH6xOEJEdtN3pg . To run it, you need a Java Runtime Environment (JRE) with version 11 or higher installed. Config can be passed as environment variables or by creating `application.yaml` in the working directory (e.g. next to the downloaded jar file).
 
 Example:
 
@@ -33,7 +33,7 @@ echo "TIBBER_PASSWORD: mysecretpassword" >> application.yaml
 java -Xmx25M -jar tibber-meter-uploader.master.jar 
 ```
 
-Memory assignment of the process can be tuned by the `-Xmx` option - adjust it to your needs so that the process does not get an out of memory error.
+Memory assignment of the process can be fine tuned by the `-Xmx` option - adjust it to your needs so that the process does not get an out of memory error.
 
 ## Konfiguration
 
